@@ -1,6 +1,7 @@
 async function getProducts() {
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    const res = await fetch('http://localhost:3000/data.json');
+    const res = await fetch('http://localhost:3000/data.json', {
+        cache: 'force-cache',
+    });
     const data = await res.json();
 
     return data.products;
