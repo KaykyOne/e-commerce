@@ -1,4 +1,4 @@
-import Navbar from "@/app/components/navbar";
+import Navbar from "@/components/navbar";
 import { ShoppingCart } from "@deemlol/next-icons"
 
 export default function Header() {
