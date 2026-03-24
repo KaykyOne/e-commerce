@@ -1,4 +1,6 @@
-front -> commits for files for structure of frontend, including layout and pages for authentication and admin panel.
-server -> commits for files for structure of backend, including routes and controllers for authentication and admin panel.
-backend -> commits for files for structure of backend, including Laravel
-common -> commits for files that are shared between frontend and backend, such as configuration files, utilities, and documentation.
+feat: adiciona tela de login
+fix: corrige erro ao carregar imagem no header
+style: ajusta responsividade da home
+refactor: organiza hooks da página de agendamento
+chore: adiciona eslint e prettier
+perf: otimiza carregamento de imagens com next/image
