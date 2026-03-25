@@ -7,7 +7,7 @@ export default async function page() {
   const { getProducts } = UseProduct()
 
   const res: Product[] = await getProducts()
-
+  console.log(res)
 
   const RenderPrice = (product: Product) => {
     return (

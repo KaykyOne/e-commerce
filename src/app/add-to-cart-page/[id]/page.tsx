@@ -1,5 +1,4 @@
 import UseProduct from "@/hooks/useProduct"
-import Product from "@/types/product"
 import Image from "next/image"
 
 type Props = {
@@ -11,7 +10,7 @@ export default async function AddToCartPage({ params }: Props) {
     const { getProduct } = UseProduct()
     const { id } = await params
 
-    const product: Product = await getProduct(id)
+    const product = await getProduct(id)
 
 
     if (!product) {
