@@ -7,7 +7,7 @@ export default async function page() {
   const { getProducts } = UseProduct()
 
   const res: Product[] = await getProducts()
-  await new Promise(resolve => setTimeout(resolve, 2000))
+
 
   const RenderPrice = (product: Product) => {
     return (
@@ -23,9 +23,9 @@ export default async function page() {
   return (
     <div className="grid grid-cols-9 grid-rows-6 h-[860px] gap-6">
 
-      <Link 
-      href={`/add-to-cart-page/${res[0].id}`}
-      className="col-span-6 row-span-6 relative bg-neutral-900 overflow-hidden group cursor-pointer">
+      <Link
+        href={`/add-to-cart-page/${res[0].id}`}
+        className="col-span-6 row-span-6 relative bg-neutral-900 overflow-hidden group cursor-pointer">
         <Image
           src={res[0].image}
           alt={res[0].title}
@@ -41,7 +41,7 @@ export default async function page() {
         </div>
       </Link>
 
-      <Link 
+      <Link
         href={`/add-to-cart-page/${res[1].id}`}
         className="col-span-3 row-span-3 relative bg-neutral-900 overflow-hidden group cursor-pointer"
       >
@@ -56,7 +56,7 @@ export default async function page() {
       </Link>
 
 
-      <Link 
+      <Link
         href={`/add-to-cart-page/${res[2].id}`}
         className="col-span-3 row-span-3 relative bg-neutral-900 overflow-hidden group cursor-pointer"
       >

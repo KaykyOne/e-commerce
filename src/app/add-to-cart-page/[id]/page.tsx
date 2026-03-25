@@ -6,7 +6,7 @@ type Props = {
     params: Promise<{ id: string }>
 }
 
-export default async function page({ params }: Props) {
+export default async function AddToCartPage({ params }: Props) {
 
     const { getProduct } = UseProduct()
     const { id } = await params
