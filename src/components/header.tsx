@@ -1,11 +1,12 @@
 import Navbar from "@/components/navbar";
 import { ShoppingCart } from "@deemlol/next-icons"
+import Link from "next/link";
 
 export default function Header() {
     return (
         <header className="flex gap-2 justify-between items-center px-4 py-4">
             <div className="flex gap-4 justify-center items-center">
-                <a className="text-2xl font-bold hover:scale-105 transition-all duration-300" href="/home">devstore</a>
+                <Link className="text-2xl font-bold hover:scale-105 transition-all duration-300" href="/">devstore</Link>
                 <Navbar />
             </div>
             <div className="flex gap-2 justify-center items-center text-sm">

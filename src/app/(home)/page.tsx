@@ -1,7 +1,7 @@
-import UseProduct from "./hooks/useProduct"
+import UseProduct from "../../hooks/useProduct"
 import Image from "next/image"
-import RenderProduct from "./components/renderProduct"
 import Product from "@/types/product"
+import Link from "next/link"
 
 export default async function page() {
   const { getProducts } = UseProduct()
@@ -23,7 +23,9 @@ export default async function page() {
   return (
     <div className="grid grid-cols-9 grid-rows-6 h-[860px] gap-6">
 
-      <div className="col-span-6 row-span-6 relative bg-neutral-900 overflow-hidden group cursor-pointer">
+      <Link 
+      href={`/add-to-cart-page/${res[0].id}`}
+      className="col-span-6 row-span-6 relative bg-neutral-900 overflow-hidden group cursor-pointer">
         <Image
           src={res[0].image}
           alt={res[0].title}
@@ -37,9 +39,12 @@ export default async function page() {
             <p className="text-white text-2xl font-medium">{res[0].price}$</p>
           </div>
         </div>
-      </div>
+      </Link>
 
-      <div className="col-span-3 row-span-3 relative bg-neutral-900 overflow-hidden group cursor-pointer">
+      <Link 
+        href={`/add-to-cart-page/${res[1].id}`}
+        className="col-span-3 row-span-3 relative bg-neutral-900 overflow-hidden group cursor-pointer"
+      >
         <Image
           src={res[1].image}
           alt={res[1].title}
@@ -48,10 +53,13 @@ export default async function page() {
           className="object-contain object-bottom"
         />
         {RenderPrice(res[1])}
-      </div>
+      </Link>
 
 
-      <div className="col-span-3 row-span-3 relative bg-neutral-900 overflow-hidden group cursor-pointer">
+      <Link 
+        href={`/add-to-cart-page/${res[2].id}`}
+        className="col-span-3 row-span-3 relative bg-neutral-900 overflow-hidden group cursor-pointer"
+      >
         <Image
           src={res[2].image}
           alt={res[2].title}
@@ -60,7 +68,7 @@ export default async function page() {
           className="object-contain object-bottom"
         />
         {RenderPrice(res[2])}
-      </div>
+      </Link>
 
     </div>
   )
