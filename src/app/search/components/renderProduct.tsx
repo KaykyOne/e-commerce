@@ -1,8 +1,9 @@
+"use client"
+
 import Product from "@/types/product"
 import Image from "next/image"
 import Modal from "@/components/modal";
 import { useState } from "react";
-import AddToCartPage from "@/app/add-to-cart-page/[id]/page";
 
 export default function RenderProduct({ product }: { product: Product }) {
 

@@ -2,7 +2,7 @@ import Product from "@/types/product";
 import { api } from "@/data/api";
 
 async function getProducts() {
-    const res = await api('products', {
+    const res = await api('products/all', {
         next: {
             revalidate: 60 * 60,
         }
@@ -18,7 +18,7 @@ async function getProducts() {
 }
 
 async function getProduct(id: string) {
-    const res = await api(`products/id?id=${id}`, {
+    const res = await api(`products/id/${id}`, {
         cache: "no-store"
     });
 
@@ -26,7 +26,7 @@ async function getProduct(id: string) {
         return null
     }
 
-    console.log(res)
+    //console.log(res)
     if (!res.ok) {
         throw new Error("Failed to fetch product")
     }

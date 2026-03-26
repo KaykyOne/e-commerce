@@ -1,8 +1,39 @@
 import UseProduct from "@/hooks/useProduct"
 import Image from "next/image"
+import Product from "@/types/product"
+import { Metadata } from "next"
+import AddToCart from "@/app/add-to-cart-page/components/addToCart"
 
 type Props = {
     params: Promise<{ id: string }>
+}
+
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+
+    const { getProduct } = UseProduct()
+    const { id } = await params
+
+    if (!id) {
+        return {
+            title: "Produto não encontrado",
+            description: "O produto que você está procurando não foi encontrado."
+        }
+    }
+
+    const product: Product | null = await getProduct(id)
+    return {
+        title: product?.title || "Produto não encontrado",
+        description: product?.description || "O produto que você está procurando não foi encontrado."
+    }
+}
+
+export async function generateStaticParams() {
+    const { getProducts } = UseProduct()
+    const products = await getProducts()
+    return products.map((product: Product) => ({
+        id: String(product.id)
+    }))
 }
 
 export default async function AddToCartPage({ params }: Props) {
@@ -10,8 +41,7 @@ export default async function AddToCartPage({ params }: Props) {
     const { getProduct } = UseProduct()
     const { id } = await params
 
-    const product = await getProduct(id)
-
+    const product: Product | null = await getProduct(id)
 
     if (!product) {
         return (
@@ -60,9 +90,8 @@ export default async function AddToCartPage({ params }: Props) {
                         GG
                     </div>
                 </div>
-                <button className="w-full p-4 bg-emerald-500 mt-10 rounded-full text-white justify-center items-center text-center cursor-pointer hover:opacity-75 transition-all duration-300">
-                    Adicionar ao carrinho
-                </button>
+                <AddToCart product={product} />
+
             </div>
         </div>
     )

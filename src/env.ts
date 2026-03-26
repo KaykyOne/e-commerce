@@ -12,3 +12,4 @@ if(!parsedEnv.success) {
 }
 
 export const env = parsedEnv.data
+export const API_BASE_URL = env.NEXT_PUBLIC_API_BASE_URL

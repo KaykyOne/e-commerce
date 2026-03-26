@@ -1,36 +1,39 @@
-"use client"
-import { useState, useEffect } from "react"
 import UseProduct from "@/hooks/useProduct"
 import RenderProduct from "./components/renderProduct"
 import Product from "@/types/product"
-import { redirect, useSearchParams } from "next/navigation"
+import { redirect } from "next/navigation"
 
-export default function SearchPage() {
+type Props = {
+  searchParams: Promise<{ query?: string }>
+}
+
+export default async function SearchPage({ searchParams }: Props) {
   const { getProducts } = UseProduct()
+  const { query = "" } = await searchParams
+  const searchTerm = query.trim()
 
-  const [products, setProducts] = useState<Product[]>([])
-  const [searchTerm, setSearchTerm] = useState("")
+  if (!searchTerm) redirect("/")
 
-  const searchParams = useSearchParams()
-  useEffect(() => {
-    setSearchTerm(searchParams.get("query") || "")
-    if (searchParams.get("query") === "") redirect("/")
-    getProducts().then((data) => setProducts(data)).catch((err) => { console.log(err); setProducts([]) })
-  }, [])
+  const products: Product[] = await getProducts()
+  const filteredProducts = products.filter((product) =>
+    product.title.toLowerCase().trim().includes(searchTerm.toLowerCase())
+  )
 
   return (
-    <div className="flex-1 grid grid-cols-3 gap-6 min-h-[800px]">
-      {products.length > 0 ?products
-        .filter((product) =>
-          product.title.toLowerCase().trim().includes(searchTerm.toLowerCase().trim())
-        )
-        .map((product) => (
-          <RenderProduct key={product.id} product={product} />
-        )) : (
+    <div className="flex flex-col w-full h-full">
+      <p>Busca por: {searchTerm}</p>
+      <div className="flex-1 grid grid-cols-3 gap-6 min-h-[800px]">
+
+        {filteredProducts.length > 0 ? filteredProducts
+          .map((product) => (
+            <RenderProduct key={product.id} product={product} />
+          )) : (
           <div className="col-span-3 flex flex-col items-center justify-center gap-4">
             <h1 className="text-2xl font-semibold">Nenhum produto encontrado</h1>
           </div>
         )}
+      </div>
     </div>
+
   )
 }
