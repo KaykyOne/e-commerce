@@ -13,7 +13,7 @@ export default function AddToCart({ product }: Props) {
 
     return (
         <>
-            <button className="w-full p-4 bg-emerald-500 mt-10 rounded-full text-white justify-center items-center text-center cursor-pointer hover:opacity-75 transition-all duration-300" onClick={() => addToCart(product)}>
+            <button className="w-full p-4 bg-emerald-500 mt-10 rounded-full text-white justify-center items-center text-center cursor-pointer hover:opacity-75 transition-all duration-300" onClick={() => addToCart(product)} id="addCart">
                 Adicionar ao carrinho
             </button>
         </>

@@ -12,6 +12,8 @@ type Props = {
 export default function CartNav({ isCartOpen, setIsCartOpen, context }: Props) {
 
     const { cartItems, removeFromCart, clearCart } = context;
+
+    if(!isCartOpen) return null;
     const modalRoot = document.getElementById('container')
 
     if (!isCartOpen || !modalRoot) return null;
